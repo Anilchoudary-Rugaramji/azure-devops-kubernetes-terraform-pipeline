@@ -23,14 +23,12 @@ jobs:
 
 - job: Job2
   dependsOn: Job3
-  displayName: 'Deploy'
   steps:
   - script: echo Job2!
     displayName: 'Run a one-line script'
     condition: 
 
 - job: Job3
-  displayName: 'Deploy'
   steps:
   - script: echo Job2!
     displayName: 'Run a one-line script'
