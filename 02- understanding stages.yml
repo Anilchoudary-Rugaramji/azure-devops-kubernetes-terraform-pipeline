@@ -20,7 +20,22 @@ stages:
     - bash: echo $(Build.BuildId)
     - bash: echo $(Build.SourceBranchName)
     - bash: echo $(Build.ArtifactStagingDirectory)
-      displayName: 'Build Step'
+    - bash: echo $(System.DefaultWorkingDirectory)
+    - bash: ls -R $(Build.ArtifactStagingDirectory)
+
+    - bash: java -version
+    - bash: node --version
+    - bash: python --version
+    - bash: mvn -version
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+      
 
   # - job: SecondJobInBuild
   #   steps:
