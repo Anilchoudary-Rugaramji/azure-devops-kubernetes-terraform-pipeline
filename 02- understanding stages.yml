@@ -15,34 +15,39 @@ stages:
   - job: FirstJobInBuild
     steps:
     - script: echo "Building code"
+    - bash: echo $(Pipeline_level_variable)
+    - bash: echo $(Build.Buildnumber)
+    - bash: echo $(Build.BuildId)
+    - bash: echo $(Build.SourceBranchName)
+    - bash: echo $(Build.ArtifactStagingDirectory)
       displayName: 'Build Step'
 
-  - job: SecondJobInBuild
-    steps:
-    - script: echo "Building code"
-      displayName: 'Build Step'
+  # - job: SecondJobInBuild
+  #   steps:
+  #   - script: echo "Building code"
+  #     displayName: 'Build Step'
 
-- stage: DevDeploy
-  jobs:
-  - job: DeployToDev
-    steps:
-    - script: echo "Deploying to Dev environment"
-      displayName: 'Dev Deployment Step'
+# - stage: DevDeploy
+#   jobs:
+#   - job: DeployToDev
+#     steps:
+#     - script: echo "Deploying to Dev environment"
+#       displayName: 'Dev Deployment Step'
 
-- stage: QADeploy
-  dependsOn: Build
-  jobs:
-  - job: DeployToQA
-    steps:
-    - script: echo "Deploying to QA environment"
-      displayName: 'QA Deployment Step'
+# - stage: QADeploy
+#   dependsOn: Build
+#   jobs:
+#   - job: DeployToQA
+#     steps:
+#     - script: echo "Deploying to QA environment"
+#       displayName: 'QA Deployment Step'
 
-- stage: ProdDeploy
-  dependsOn:
-  - DevDeploy
-  - QADeploy
-  jobs:
-  - job: DeployToProd
-    steps:
-    - script: echo "Deploying to Production environment"
-      displayName: 'Production Deployment Step'
+# - stage: ProdDeploy
+#   dependsOn:
+#   - DevDeploy
+#   - QADeploy
+#   jobs:
+#   - job: DeployToProd
+#     steps:
+#     - script: echo "Deploying to Production environment"
+#       displayName: 'Production Deployment Step'
