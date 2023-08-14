@@ -30,6 +30,7 @@ stages:
       displayName: 'Dev Deployment Step'
 
 - stage: QADeploy
+  dependsOn: Build
   jobs:
   - job: DeployToQA
     steps:
@@ -37,6 +38,9 @@ stages:
       displayName: 'QA Deployment Step'
 
 - stage: ProdDeploy
+  dependsOn:
+  - DevDeploy
+  - QADeploy
   jobs:
   - job: DeployToProd
     steps:
