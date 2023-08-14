@@ -9,9 +9,9 @@ trigger:
 strategy:
   matrix:
     linux:
-      operationSystem: ubuntu-latest
+      operatingSystem: ubuntu-latest  # Fixed typo in "operatingSystem"
     mac:
-      operationSystem: macos-latest
+      operatingSystem: macos-latest
 
 pool:
   vmImage: $(operatingSystem)
@@ -19,5 +19,3 @@ pool:
 steps:
 - script: echo running on $(operatingSystem)
   displayName: 'Run a one-line script'
-
-
